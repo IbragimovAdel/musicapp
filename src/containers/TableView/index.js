@@ -1,8 +1,9 @@
 import React from 'react';
+import ArtistsTable from '../../components/ArtistsTable';
 
 const TableView = () => {
     return(
-        <div>Table</div>
+        <div><ArtistsTable /></div>
     )
 }
 
