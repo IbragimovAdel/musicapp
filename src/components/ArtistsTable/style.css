@@ -1,7 +1,43 @@
-tBody {
+.table-container {
     width: 100%;
 }
 
-th, td{
-    width: 500px;
+.artists-table {
+    width: 100%;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td,th {
+    width: 33%;
+    border-right: 1px solid black;
+}
+
+td {
+    font-size: 20px;
+    padding: 10px;
+    color: rgba(0,0,0,0.95);
+}
+
+tbody tr:hover {
+    background-color: rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.headerRow {
+    font-size: 30px;
+    border-bottom: 1px solid black;
+}
+
+.searchField {
+    display: block;
+    margin: 30px auto 30px;
+    width: 30%;
+    height: 50px;
+    font-size: 25px;
+    padding: 15px;
+    border: 1px solid rgba(0,0,0,0.4);
 }

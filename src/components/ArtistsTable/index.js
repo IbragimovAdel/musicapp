@@ -1,5 +1,6 @@
 import React from 'react'
 import {inject, observer} from 'mobx-react'
+import './style.css'
 
 const ArtistsTable = inject('store')(observer(class ArtistsTable extends React.Component {
 
@@ -20,11 +21,11 @@ const ArtistsTable = inject('store')(observer(class ArtistsTable extends React.C
 
     render() {
         return(
-            <div>
-                <input type='text' value={this.state.value} onChange={this.handChange} />
-                <table>
+            <div className='table-container'>
+                <input type='text' value={this.state.value} onChange={this.handChange} className='searchField' />
+                <table className='artists-table'>
                     <thead>
-                    <tr>
+                    <tr className='headerRow'>
                         <th>Artist</th>
                         <th>Rating</th>
                         <th>Description</th>
