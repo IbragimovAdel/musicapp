@@ -1,49 +1,51 @@
 import React from 'react';
 
-import GridView from '../GridView';
-import TableView from '../TableView';
-import InfoView from '../InfoView';
-import SearchView from '../SearchView';
-import Menu from '../../components/Menu';
+import ArtistView from '../ArtistView';
+import MainView from '../MainView';
 
 export default class App extends React.Component {
 
     /* 
-        page: grid,table,info,search
+        page: main,artist
     */
 
     constructor(){
         super();
         this.state = {
-            page: 'table'
+            page: 'main',
+            artistID: null,
+            name: null,
+            genre: null,
         }
+
+        this.changePage = this.changePage.bind(this);
+
     }
     
-    render(){
+    changePage(page, id,name,genre){
+        this.setState({
+            page: page,
+            artistID: id,
+            name: name,
+            genre: genre,
+        })
+    }
 
+    render(){
         let content;
         switch(this.state.page){
-            case 'grid':
-                content=<GridView />;
+            case 'main':
+                content=<MainView changePage={this.changePage}/>
                 break;
-            case 'table':
-                content=<TableView />;
-                break;
-            case 'search':
-                content=<SearchView />;
-                break;
-            case 'info':
-                content=<InfoView />;
+            case 'artist':
+                content=<ArtistView id={this.state.artistID} name={this.state.name} genre={this.state.genre} />;
                 break;
             default: 
-                content=<GridView />;
+                content=<MainView changePage={this.changePage}/>;
                 break;
         }
-
-        console.log(content);
         return(
             <React.Fragment>
-                <Menu />
                 {content}
             </React.Fragment>
     )}
