@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ArtistView from '../ArtistView';
-import MainView from '../MainView';
+import ArtistView from '../../components/ArtistView';
+import MainView from '../../components/MainView';
 
 export default class App extends React.Component {
 
