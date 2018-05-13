@@ -2,16 +2,18 @@
 import React from 'react';
 import './style.css';
 
-const ArtistRow = ({name,genre,changePage,id}) => {
+import { withRouter } from 'react-router';
+
+const ArtistRow = ({name,genre,id,history}) => {
     return(
-        <div className='result-item' onClick={()=>changePage('artist',id,name,genre)}>
+        <div className='result-item' onClick={()=>{history.push(`/albums?artistID=${id}`)}}>
             <p>{name}</p>
             <p>{genre}</p>
         </div>
     )
 }
 
-class MainView extends React.Component {
+const MainView = withRouter(class MainView extends React.Component {
 
     constructor(props){
         super(props);
@@ -20,6 +22,13 @@ class MainView extends React.Component {
             value:'',
             artists:[]
         }
+    }
+
+    componentDidMount(){
+        let artist = decodeURIComponent(this.props.location.search.slice(8));
+        this.setState({
+            value: artist,
+        },this.fetchArtists)
     }
 
     async fetchArtists(){
@@ -44,23 +53,24 @@ class MainView extends React.Component {
     render(){
         return <div className='main-container'>
             <div className='search-bar'>
-                <input type='text' className='search-input' value={this.state.value} onChange={e => {
+                <input type='text' className='search-input' value={this.state.value} placeholder='Search for artists...' onChange={e => {
                     this.setState({
                         value: e.target.value,
                     })
                 }} onKeyDown={e => {
-                    if(e.keyCode === 'Enter' || e.key === 'Enter'){
+                    if((e.keyCode === 'Enter' || e.key === 'Enter')&&(this.state.value!=='')){
+                        this.props.history.push(`/search?artist=${encodeURIComponent(this.state.value)}`)
                         this.fetchArtists();
                     }
                 }} />
             </div>
             <div className='result-bar'>
                 {this.state.artists.map(artist => {
-                    return <ArtistRow key={artist.id} id={artist.id} name={artist.name} genre={artist.genre} changePage={this.props.changePage} />
+                    return <ArtistRow key={artist.id} id={artist.id} name={artist.name} genre={artist.genre} history={this.props.history} />
                 })}
             </div>
         </div>
     }
-}
+})
 
 export default MainView;

@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './containers/App';
-import {Provider} from 'mobx-react';
+import { Provider } from 'mobx-react';
+import { HashRouter } from 'react-router-dom';
 
-ReactDOM.render(<Provider><App /></Provider>, document.getElementById('root'));
+ReactDOM.render(<HashRouter>
+    <App />
+</HashRouter>, document.getElementById('root'));
