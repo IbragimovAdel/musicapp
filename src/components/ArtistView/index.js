@@ -11,6 +11,7 @@ const ArtistView = withRouter(class ArtistView extends React.Component {
             videos: [],
             name: null,
             genre: null,
+            showModal: false,
         }
     }
 
@@ -37,6 +38,17 @@ const ArtistView = withRouter(class ArtistView extends React.Component {
         let artistID = this.props.location.search.slice(10);
     }
 
+    openModal(){
+        this.setState({
+            showModal: true,
+        })
+    }
+    closeModal(){
+        this.setState({
+            showModal: false,
+        })
+    }
+
     render() {
         let { name, genre, id } = this.props
         return <div className='artist-page'>
@@ -44,6 +56,7 @@ const ArtistView = withRouter(class ArtistView extends React.Component {
             <p>{genre}</p>
             <div className='artist-albums'></div>
             <div className='artist-videos'></div>
+            <button onClick={()=>{this.openModal}}>Open Modal</button>
         </div>
     }
 })
